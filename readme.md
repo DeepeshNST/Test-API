@@ -27,5 +27,7 @@ This API allows you to manage a list of usernames stored in a MySQL database. It
 
 By using this API, you can easily manage a collection of usernames with standard CRUD operations.
 
-start : npm start
-test : npm test
+start api
+    - npm start
+test api
+    - npm test
