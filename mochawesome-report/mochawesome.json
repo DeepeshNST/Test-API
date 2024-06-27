@@ -1,0 +1,255 @@
+{
+  "stats": {
+    "suites": 5,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-06-27T05:13:29.718Z",
+    "end": "2024-06-27T05:13:29.852Z",
+    "duration": 134,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9127dd18-4dd3-461c-b140-f21683fc8468",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ebf13619-fb5f-4ce2-9670-0efa739a2483",
+          "title": "Usernames API",
+          "fullFile": "C:\\Test-API\\__tests__\\test.js",
+          "file": "\\__tests__\\test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Usernames API\"",
+              "fullTitle": "Usernames API \"before each\" hook in \"Usernames API\"",
+              "timedOut": false,
+              "duration": 3,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "connection.query('DELETE FROM usernames', (err) => {\n    if (err) throw err;\n    done();\n});",
+              "err": {},
+              "uuid": "a8529343-3cf4-406e-a4d6-6f53e703da5e",
+              "parentUUID": "ebf13619-fb5f-4ce2-9670-0efa739a2483",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "97c944e7-07fb-4a77-8dbe-51167411bcc5",
+              "title": "POST /usernames",
+              "fullFile": "C:\\Test-API\\__tests__\\test.js",
+              "file": "\\__tests__\\test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should create a new username",
+                  "fullTitle": "Usernames API POST /usernames should create a new username",
+                  "timedOut": false,
+                  "duration": 45,
+                  "state": "passed",
+                  "speed": "medium",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request(app)\n    .post('/usernames')\n    .send({ username: 'test_user' })\n    .end((err, res) => {\n        res.should.have.status(201);\n        res.text.should.equal('Username added');\n        connection.query('SELECT * FROM usernames WHERE username = ?', ['test_user'], (err, results) => {\n            if (err) throw err;\n            results.should.be.a('array');\n            results.length.should.be.eql(1);\n            results[0].username.should.equal('test_user');\n            done();\n        });\n    });",
+                  "err": {},
+                  "uuid": "eabe9c77-d733-4d41-8d61-d79353abd3bd",
+                  "parentUUID": "97c944e7-07fb-4a77-8dbe-51167411bcc5",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "eabe9c77-d733-4d41-8d61-d79353abd3bd"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 45,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 60000
+            },
+            {
+              "uuid": "c847fe09-759a-422d-a8c3-c5fcb31d8567",
+              "title": "GET /usernames",
+              "fullFile": "C:\\Test-API\\__tests__\\test.js",
+              "file": "\\__tests__\\test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should get all usernames",
+                  "fullTitle": "Usernames API GET /usernames should get all usernames",
+                  "timedOut": false,
+                  "duration": 8,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const seedDataQuery = `\nINSERT INTO usernames (username)\nVALUES \n    ('john_doe'),\n    ('jane_smith'),\n    ('alice_johnson')\n`;\nconnection.query(seedDataQuery, (err, results) => {\n    if (err) throw err;\n    chai.request(app)\n        .get('/usernames')\n        .end((err, res) => {\n            res.should.have.status(200);\n            res.body.should.be.a('array');\n            res.body.length.should.be.eql(3);\n            done();\n        });\n});",
+                  "err": {},
+                  "uuid": "4f8a184d-d4f8-4c3d-86bc-2c12d596b4e9",
+                  "parentUUID": "c847fe09-759a-422d-a8c3-c5fcb31d8567",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "4f8a184d-d4f8-4c3d-86bc-2c12d596b4e9"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 8,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 60000
+            },
+            {
+              "uuid": "03847587-29ec-44dd-92f7-efe261793f27",
+              "title": "PUT /usernames/:id",
+              "fullFile": "C:\\Test-API\\__tests__\\test.js",
+              "file": "\\__tests__\\test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should update a username by id",
+                  "fullTitle": "Usernames API PUT /usernames/:id should update a username by id",
+                  "timedOut": false,
+                  "duration": 14,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const seedQuery = 'INSERT INTO usernames (username) VALUES (?)';\nconnection.query(seedQuery, ['original_user'], (err, results) => {\n    if (err) throw err;\n    const id = results.insertId;\n    chai.request(app)\n        .put(`/usernames/${id}`)\n        .send({ username: 'updated_user' })\n        .end((err, res) => {\n            res.should.have.status(200);\n            res.text.should.equal('Username updated');\n            // Verify the database\n            connection.query('SELECT * FROM usernames WHERE id = ?', [id], (err, results) => {\n                if (err) throw err;\n                results.should.be.a('array');\n                results.length.should.be.eql(1);\n                results[0].username.should.equal('updated_user');\n                done();\n            });\n        });\n});",
+                  "err": {},
+                  "uuid": "46ac3a9c-88d7-4225-972f-90e26b2a81da",
+                  "parentUUID": "03847587-29ec-44dd-92f7-efe261793f27",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "46ac3a9c-88d7-4225-972f-90e26b2a81da"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 14,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 60000
+            },
+            {
+              "uuid": "77aaf094-6fc7-4b9d-81e3-92a3f2ac4066",
+              "title": "DELETE /usernames/:id",
+              "fullFile": "C:\\Test-API\\__tests__\\test.js",
+              "file": "\\__tests__\\test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should delete a username by id",
+                  "fullTitle": "Usernames API DELETE /usernames/:id should delete a username by id",
+                  "timedOut": false,
+                  "duration": 12,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const seedQuery = 'INSERT INTO usernames (username) VALUES (?)';\nconnection.query(seedQuery, ['delete_user'], (err, results) => {\n    if (err) throw err;\n    const id = results.insertId;\n    chai.request(app)\n        .delete(`/usernames/${id}`)\n        .end((err, res) => {\n            res.should.have.status(200);\n            res.text.should.equal('Username deleted');\n            connection.query('SELECT * FROM usernames WHERE id = ?', [id], (err, results) => {\n                if (err) throw err;\n                results.should.be.a('array');\n                results.length.should.be.eql(0);\n                done();\n            });\n        });\n});",
+                  "err": {},
+                  "uuid": "a9b127ee-62e0-426c-ad05-646bdd846129",
+                  "parentUUID": "77aaf094-6fc7-4b9d-81e3-92a3f2ac4066",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "a9b127ee-62e0-426c-ad05-646bdd846129"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 12,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 60000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 60000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 60000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "8.4.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.1.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "5.2.0"
+    }
+  }
+}
